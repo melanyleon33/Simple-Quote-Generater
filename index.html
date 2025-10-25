@@ -3,86 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ethereal Quote Generator</title>
+  <title>Ethereal Inspiration Quotes</title>
   <style>
-    /* --- Overall Styling --- */
+    /* --- Base Styles --- */
     body {
       margin: 0;
       padding: 0;
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #ffe6f0 0%, #fdf0f5 100%);
-      color: #3c3c3c;
+      background: linear-gradient(135deg, #fde6ec, #fff3f6, #fdf7fb);
+      color: #3b3b3b;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
-    /* --- Decorative Flower Background --- */
-    body::before, body::after {
-      content: '';
+    /* --- Soft Floral Background Effects --- */
+    .flower-glow {
       position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle at center, rgba(255,192,203,0.4), transparent 70%);
       border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(255, 182, 193, 0.4), transparent 70%);
+      filter: blur(60px);
       z-index: -1;
-      filter: blur(40px);
-    }
-    body::before {
-      top: -100px;
-      left: -100px;
-    }
-    body::after {
-      bottom: -100px;
-      right: -100px;
+      animation: float 8s ease-in-out infinite alternate;
     }
 
-    /* --- Card --- */
-    .quote-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 8px 25px rgba(255, 192, 203, 0.3);
-      max-width: 500px;
+    .flower1 { width: 280px; height: 280px; top: -80px; left: -100px; }
+    .flower2 { width: 350px; height: 350px; bottom: -120px; right: -100px; animation-delay: 3s; }
+    .flower3 { width: 200px; height: 200px; top: 200px; right: 100px; animation-delay: 5s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-20px); }
+    }
+
+    /* --- Header --- */
+    header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background: white;
+      padding: 15px 0;
       text-align: center;
-      padding: 40px;
-      border: 1px solid rgba(255, 200, 220, 0.4);
+      font-size: 1.1rem;
+      color: #5b4b52;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+      box-shadow: 0 2px 15px rgba(255, 182, 193, 0.2);
+      z-index: 5;
+    }
+
+    header span {
+      font-weight: 600;
+      color: #ff88a6;
+    }
+
+    /* --- Quote Card --- */
+    .quote-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+      text-align: center;
+      padding: 45px;
+      max-width: 500px;
       animation: fadeIn 1s ease;
+      border: 1px solid rgba(255, 200, 220, 0.4);
     }
 
     .quote-text {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 500;
-      color: #4a4a4a;
-      margin-bottom: 20px;
+      color: #444;
+      margin-bottom: 18px;
+      line-height: 1.6;
     }
 
     .quote-author {
       font-size: 1rem;
-      color: #888;
+      color: #777;
       font-style: italic;
     }
 
+    /* --- Button --- */
     button {
       margin-top: 25px;
       padding: 12px 30px;
-      background: linear-gradient(90deg, #ffb6c1, #ff9bb0);
+      background: linear-gradient(90deg, #ffa6bb, #ff8fab);
       color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       font-size: 1rem;
       font-weight: 500;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 182, 193, 0.4);
+      box-shadow: 0 6px 20px rgba(255, 182, 193, 0.5);
       transition: all 0.3s ease;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255, 182, 193, 0.6);
+      transform: scale(1.06);
+      box-shadow: 0 10px 25px rgba(255, 182, 193, 0.6);
     }
 
     @keyframes fadeIn {
@@ -90,33 +113,53 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* --- Footer --- */
     footer {
       position: absolute;
-      bottom: 20px;
+      bottom: 15px;
       font-size: 0.9rem;
       color: #a8a8a8;
+      letter-spacing: 0.3px;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      .quote-card { width: 80%; padding: 30px; }
+      .quote-text { font-size: 1.1rem; }
+      header { font-size: 0.95rem; padding: 10px 5px; }
     }
   </style>
 </head>
 <body>
+  <!-- Floating Flower Glows -->
+  <div class="flower-glow flower1"></div>
+  <div class="flower-glow flower2"></div>
+  <div class="flower-glow flower3"></div>
+
+  <!-- Header with Inspirational Message -->
+  <header>
+    For moments when the world feels heavy, <span>find light in these words of renewal.</span>
+  </header>
+
+  <!-- Quote Card -->
   <div class="quote-card">
-    <div class="quote-text" id="quote">“Every dawn whispers the promise of infinite beginnings.”</div>
-    <div class="quote-author" id="author">– Luminous Minds</div>
-    <button onclick="generateQuote()">✨ New Quote</button>
+    <div class="quote-text" id="quote">“Even the faintest sunrise defeats the longest night.”</div>
+    <div class="quote-author" id="author">– Serin Vale</div>
+    <button onclick="generateQuote()">🌸 New Quote</button>
   </div>
 
-  <footer>© 2025 Ethereal Quote Generator</footer>
+  <footer>© 2025 Ethereal Inspiration</footer>
 
   <script>
     const quotes = [
-      { text: "“The quiet heart holds the universe’s loudest wisdom.”", author: "– Nova Aurelia" },
-      { text: "“Dreams are starlight trying to remember themselves.”", author: "– Elara Voss" },
-      { text: "“In gentleness lies the power to reshape worlds.”", author: "– Arin Solis" },
-      { text: "“Tomorrow blooms from the kindness you plant today.”", author: "– Lyra Thorne" },
-      { text: "“Even silence hums when you listen with your soul.”", author: "– Elys Verdan" },
-      { text: "“You are a constellation of all the moments you’ve ever loved.”", author: "– Mira Solenne" },
-      { text: "“Hope is the petal that refuses to fall, even in storms.”", author: "– Callen Rue" },
-      { text: "“Every breath is an unseen miracle dressed in calm.”", author: "– Serin Vale" }
+      { text: "“Even the faintest sunrise defeats the longest night.”", author: "– Serin Vale" },
+      { text: "“You have outlived every bad day before this one — you can outshine this too.”", author: "– Liora Kyn" },
+      { text: "“Grace grows quietly where pain once tried to root.”", author: "– Elara Voss" },
+      { text: "“You are not broken — you are simply in the middle of becoming.”", author: "– Aure Solenne" },
+      { text: "“The storm does not last forever, but your strength always does.”", author: "– Nova Thorne" },
+      { text: "“Sometimes healing sounds like silence — and that’s okay.”", author: "– Elys Verdane" },
+      { text: "“Your heart remembers how to bloom, even after every winter.”", author: "– Mira Solis" },
+      { text: "“What you call an ending, the universe calls a beginning.”", author: "– Arin Lume" }
     ];
 
     function generateQuote() {
